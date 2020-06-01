@@ -17,10 +17,12 @@
       "parameters": {
         "wdl_inputs": {
           "callability.normalBam": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bam",
+          "callability.normalBamIndex": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bai",
           "callability.tumorBam": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bam",
+          "callability.tumorBamIndex": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bai",
+          "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/input_data/hg19_random.genome.sizes.bed",
           "callability.normalMinCoverage": 8,
-          "callability.tumorMinCoverage": 14,
-          "callability.referenceFile": "/.mounts/labs/gsi/modulator/sw/data/hg19-p13/hg19_random.fa"
+          "callability.tumorMinCoverage": 14
         }
       }
     },
@@ -29,9 +31,10 @@
       "parameters": {
         "wdl_inputs": {
           "callability.normalBam": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bam",
+          "callability.normalBamIndex": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bai",
           "callability.tumorBam": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bam",
-          "callability.referenceFile": "/.mounts/labs/gsi/modulator/sw/data/hg19-p13/hg19_random.fa",
-          "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/input_data/hg19_random.genome.sizes.bed",
+          "callability.tumorBamIndex": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bai",
+          "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/input_data/S31285117_Covered.bed",
           "callability.normalMinCoverage": 8,
           "callability.tumorMinCoverage": 14
         }
