@@ -41,7 +41,7 @@ task calculateCallability {
     Int jobMemory = 8
     Int cores = 1
     Int timeout = 12
-    int threads = 4
+    Int threads = 4
     String modules = "mosdepth/0.2.9 bedtools/2.27 python/3.7"
   }
 
