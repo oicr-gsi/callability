@@ -26,6 +26,40 @@ workflow callability {
   output {
     File callabilityMetrics = calculateCallability.callabilityMetrics
   }
+
+  parameter_meta {
+    normalBam: "Normal bam input file."
+    normalBamIndex: "Normal bam index input file."
+    tumorBam: "Tumor bam input file."
+    tumorBamIndex: "Tumor bam index input file."
+    normalMinCoverage: "Normal must have at least this coverage to be considered callable."
+    tumorMinCoverage: "Tumor must have at least this coverage to be considered callable."
+    intervalFile: "The interval file of regions to calculate callability on."
+  }
+
+  meta {
+    author: "Alexander Fortuna, Michael Laszloffy"
+    email: "alexander.fortuna@oicr.on.ca, michael.laszloffy@oicr.on.ca"
+    description: "Workflow to calculate the callability of a matched tumour sample, where callability is defined as the percentage of genomic regions where a normal and a tumor bam coverage is greater than a threshold(s)."
+    dependencies: [
+      {
+        name: "mosdepth/0.2.9",
+        url: "https://github.com/brentp/mosdepth"
+      },
+      {
+        name: "bedtools/2.27",
+        url: "https://bedtools.readthedocs.io/en/latest/"
+      },
+      {
+        name: "python/3.7",
+        url: "https://www.python.org"
+      }
+    ]
+    output_meta: {
+      callabilityMetrics: "Json file with pass, fail and callability percent (# of pass bases / # total bases)"
+    }
+  }
+
 }
 
 task calculateCallability {
@@ -37,12 +71,12 @@ task calculateCallability {
     Int normalMinCoverage
     Int tumorMinCoverage
     File intervalFile
+    Int threads = 4
     String? outputFileNamePrefix
     String outputFileName = "callability_metrics.json"
     Int jobMemory = 8
     Int cores = 1
     Int timeout = 12
-    Int threads = 4
     String modules = "mosdepth/0.2.9 bedtools/2.27 python/3.7"
   }
 
@@ -85,12 +119,19 @@ task calculateCallability {
   }
 
   parameter_meta {
-
-  }
-
-  meta {
-    output_meta: {
-
-    }
+    normalBam: "Normal bam input file."
+    normalBamIndex: "Normal bam index input file."
+    tumorBam: "Tumor bam input file."
+    tumorBamIndex: "Tumor bam index input file."
+    normalMinCoverage: "Normal must have at least this coverage to be considered callable."
+    tumorMinCoverage: "Tumor must have at least this coverage to be considered callable."
+    intervalFile: "The interval file of regions to calculate callability on."
+    threads: "The number of threads to run mosdepth with."
+    outputFileNamePrefix: "Output files will be prefixed with this."
+    outputFileName: "Output callability metrics file name."
+    jobMemory: "Memory allocated to job (in GB)."
+    cores: "The number of cores to allocate to the job."
+    timeout: "Maximum amount of time (in hours) the task can run for."
+    modules: "Environment module name and version to load (space separated) before command execution."
   }
 }
