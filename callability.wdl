@@ -9,7 +9,7 @@ workflow callability {
     File tumorBamIndex
     Int normalMinCoverage
     Int tumorMinCoverage
-    String intervalFile
+    File intervalFile
   }
 
   call calculateCallability {
@@ -36,7 +36,7 @@ task calculateCallability {
     File tumorBamIndex
     Int normalMinCoverage
     Int tumorMinCoverage
-    String intervalFile
+    File intervalFile
     String outputFileName = "callability_metrics.json"
     Int jobMemory = 8
     Int cores = 1
