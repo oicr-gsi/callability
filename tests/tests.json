@@ -1,0 +1,44 @@
+{
+  "defaults": {
+    "description": "Callability workflow test",
+    "metrics_calculate": "calculate.sh",
+    "metrics_compare": "compare.sh",
+    "output_metrics_dir": "/.mounts/labs/gsi/testdata/callability/output_metrics/",
+    "parameters": {
+      "wdl_options": {
+        "write_to_cache": false,
+        "read_from_cache": false
+      }
+    }
+  },
+  "tests": [
+    {
+      "id": "no_interval_file_test",
+      "parameters": {
+        "wdl_inputs": {
+          "callability.normalBam": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bam",
+          "callability.normalBamIndex": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bai",
+          "callability.tumorBam": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bam",
+          "callability.tumorBamIndex": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bai",
+          "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/input_data/hg19_random.genome.sizes.bed",
+          "callability.normalMinCoverage": 8,
+          "callability.tumorMinCoverage": 14
+        }
+      }
+    },
+    {
+      "id": "interval_file_test",
+      "parameters": {
+        "wdl_inputs": {
+          "callability.normalBam": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bam",
+          "callability.normalBamIndex": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bai",
+          "callability.tumorBam": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bam",
+          "callability.tumorBamIndex": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bai",
+          "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/input_data/S31285117_Covered.bed",
+          "callability.normalMinCoverage": 8,
+          "callability.tumorMinCoverage": 14
+        }
+      }
+    }
+  ]
+}
