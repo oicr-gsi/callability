@@ -37,6 +37,7 @@ task calculateCallability {
     Int normalMinCoverage
     Int tumorMinCoverage
     File intervalFile
+    String? outputFileNamePrefix
     String outputFileName = "callability_metrics.json"
     Int jobMemory = 8
     Int cores = 1
@@ -67,7 +68,7 @@ task calculateCallability {
     callability = 0
   else:
     callability = pass_count / (pass_count + fail_count)
-  with open('~{outputFileName}', 'w') as json_file:
+  with open('~{outputFileNamePrefix}~{outputFileName}', 'w') as json_file:
     json_file.write(f"{{\"pass\":{pass_count},\"fail\":{fail_count},\"callability\":{callability:.6f}}}")
   CODE
   >>>
