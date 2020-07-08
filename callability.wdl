@@ -103,7 +103,11 @@ task calculateCallability {
   else:
     callability = pass_count / (pass_count + fail_count)
   with open('~{outputFileNamePrefix}~{outputFileName}', 'w') as json_file:
-    json_file.write(f"{{\"pass\":{pass_count},\"fail\":{fail_count},\"callability\":{callability:.6f}}}")
+    json_file.write(f"{{\"pass\":{pass_count},"
+                    f"\"fail\":{fail_count},"
+                    f"\"callability\":{callability:.6f},"
+                    f"\"normal_min_coverage\":~{normalMinCoverage},"
+                    f"\"tumor_min_coverage\":~{tumorMinCoverage}}}")
   CODE
   >>>
 
