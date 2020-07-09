@@ -95,19 +95,25 @@ task calculateCallability {
   TOTAL="$(zcat -f ~{intervalFile} | awk -F'\t' 'BEGIN{SUM=0}{SUM+=$3-$2} END{print SUM}')"
 
   python3 <<CODE
-  total_count = int("${TOTAL}")
-  pass_count = int("${PASS}")
+  import json
+
+  total_count = int(float("${TOTAL}"))
+  pass_count = int(float("${PASS}"))
   fail_count = total_count - pass_count
   if pass_count == 0 and fail_count == 0:
-    callability = 0
+      callability = 0
   else:
-    callability = pass_count / (pass_count + fail_count)
+      callability = pass_count / (pass_count + fail_count)
+
+  metrics = {
+      "pass": pass_count,
+      "fail": fail_count,
+      "callability": round(callability, 6),
+      "normal_min_coverage": ~{normalMinCoverage},
+      "tumor_min_coverage": ~{tumorMinCoverage}
+  }
   with open('~{outputFileNamePrefix}~{outputFileName}', 'w') as json_file:
-    json_file.write(f"{{\"pass\":{pass_count},"
-                    f"\"fail\":{fail_count},"
-                    f"\"callability\":{callability:.6f},"
-                    f"\"normal_min_coverage\":~{normalMinCoverage},"
-                    f"\"tumor_min_coverage\":~{tumorMinCoverage}}}")
+      json.dump(metrics, json_file)
   CODE
   >>>
 
