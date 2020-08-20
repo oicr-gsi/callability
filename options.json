@@ -1,0 +1,6 @@
+{
+  "default_runtime_attributes": {
+    "docker": "g3chen/callability@sha256:efd5e8c9b50b5717eb30050321312220b32d84c0e79f365d25cfc059593f95ae",
+    "docker_volume": "/home/ubuntu/Downloads/sample_data:/data"
+  }
+}
