@@ -39,6 +39,20 @@
           "callability.tumorMinCoverage": 14
         }
       }
+    },
+    {
+      "id": "begin_at_zero_test",
+      "parameters": {
+        "wdl_inputs": {
+          "callability.normalBam": "/.mounts/labs/gsi/testdata/callability/input_data/normal.filter.deduped.realigned.recalibrated.bam",
+          "callability.normalBamIndex": "/.mounts/labs/gsi/testdata/callability/input_data/normal.filter.deduped.realigned.recalibrated.bai",
+          "callability.tumorBam": "/.mounts/labs/gsi/testdata/callability/input_data/tumor.filter.deduped.realigned.recalibrated.bam",
+          "callability.tumorBamIndex": "/.mounts/labs/gsi/testdata/callability/input_data/tumor.filter.deduped.realigned.recalibrated.bai",
+          "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/input_data/S31285117_Covered.bed",
+          "callability.normalMinCoverage": 8,
+          "callability.tumorMinCoverage": 14
+        }
+      }
     }
   ]
 }

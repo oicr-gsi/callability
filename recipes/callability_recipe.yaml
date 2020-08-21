@@ -1,0 +1,74 @@
+# mosdepth/0.2.9
+- name: mosdepth
+  version: 0.2.9
+  build_type: copy
+  build_args:
+    prereq_type: download
+    prereq_args:
+      url: https://github.com/brentp/mosdepth/releases/download/v0.2.9/mosdepth
+      sha256: a73283fb1a7465601a4d2d738f6f832f2fd84bf9181e0d4d2b91453da385177c
+    to: bin/mosdepth
+
+# bedtools/2.27
+- name: bedtools
+  version: 2.27
+  build_type: make
+  build_args:
+    prereq_args:
+      prereq_args:
+        sha256: f1c468c9dbd82a5c13f51c1df1fffd5ea736901cfc0ec9fb9c428d085390823d
+        url: http://deb.debian.org/debian/pool/main/b/bedtools/bedtools_2.27.1+dfsg.orig.tar.xz
+      prereq_type: download
+    prereq_type: extract
+
+# python/3.7
+- name: python
+  version: 3.7
+  permitted_os:
+   - Ubuntu18.04
+   - Ubuntu19.04
+  build_type: custom
+  build_args:
+    steps:
+    - build_args:
+        configure:
+        - --enable-shared
+        - --enable-ipv6
+        - --enable-loadable-sqlite-extensions
+        - --enable-optimizations
+        - --with-dbmliborder=bdb:gdbm
+        - --with-computed-gotos
+        - --with-ensurepip=yes
+        - --with-system-expat
+        - --with-system-libmpdec
+        - --with-system-ffi
+        prereq_args:
+          prereq_args:
+            md5: df6ec36011808205beda239c72f947cb
+            url: https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
+          prereq_type: download
+        prereq_type: extract
+      build_type: autotools
+    - build_args:
+        package: pip
+        version: 19.0.3
+      build_type: pip
+      scan_dirs: true
+    - build_args: # YAML is included so that find-modules will work correctly in the built Python
+        package: PyYAML
+        version: 5.1.2
+      build_type: pip
+      scan_dirs: true
+    - command: [ "ln", "-s", "/usr/share/pyshared/lsb_release.py", "{output_dir}/lib/python3.7/lsb_release.py" ]
+  system_depends:
+  - name: libmpdec-dev
+  - name: libreadline-dev
+    permitted_os: ["Ubuntu18.04"]
+  - name: libreadline6-dev
+    permitted_os: ["Debian8.11"]
+  - name: libncurses5-dev
+  - name: libsqlite3-dev
+  - name: libssl-dev
+  - name: uuid-dev
+  - name: libffi-dev
+  - name: tk8.6-dev
