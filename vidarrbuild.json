@@ -1,0 +1,6 @@
+{
+    "names": [
+        "callability_tumor_group"
+    ],
+    "wdl": "callability.wdl"
+}
