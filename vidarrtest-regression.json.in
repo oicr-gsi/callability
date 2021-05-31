@@ -1,0 +1,190 @@
+[
+    {
+        "arguments": {
+            "callability.calculateCallability.cores": null,
+            "callability.calculateCallability.jobMemory": null,
+            "callability.calculateCallability.modules": null,
+            "callability.calculateCallability.outputFileName": null,
+            "callability.calculateCallability.outputFileNamePrefix": null,
+            "callability.calculateCallability.threads": null,
+            "callability.calculateCallability.timeout": null,
+            "callability.intervalFile": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/hg19_random.genome.sizes.bed",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "callability.normalBam": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bam",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "callability.normalBamIndex": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bai",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "callability.normalMinCoverage": 8,
+            "callability.tumorBam": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bam",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "callability.tumorBamIndex": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bai",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "callability.tumorMinCoverage": 14
+        },
+        "description": "Callability workflow test",
+        "engineArguments": {},
+        "id": "no_interval_file_test",
+        "metadata": {
+            "callability.callabilityMetrics": {
+                "contents": [
+                    {
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_callability_no_interval_file_test_@JENKINSID@"
+                    }
+                ],
+                "type": "ALL"
+            }
+        },
+        "validators": [
+            {
+                "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
+                "metrics_compare": "@CHECKOUT@/tests/compare.sh",
+                "output_metrics": "/.mounts/labs/gsi/testdata/callability/output_metrics/no_interval_file_test.metrics",
+                "type": "script"
+            }
+        ]
+    },
+    {
+        "arguments": {
+            "callability.calculateCallability.cores": null,
+            "callability.calculateCallability.jobMemory": null,
+            "callability.calculateCallability.modules": null,
+            "callability.calculateCallability.outputFileName": null,
+            "callability.calculateCallability.outputFileNamePrefix": null,
+            "callability.calculateCallability.threads": null,
+            "callability.calculateCallability.timeout": null,
+            "callability.intervalFile": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/S31285117_Covered.bed",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "callability.normalBam": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bam",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "callability.normalBamIndex": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bai",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "callability.normalMinCoverage": 8,
+            "callability.tumorBam": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bam",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "callability.tumorBamIndex": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bai",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "callability.tumorMinCoverage": 14
+        },
+        "description": "Callability workflow test",
+        "engineArguments": {},
+        "id": "interval_file_test",
+        "metadata": {
+            "callability.callabilityMetrics": {
+                "contents": [
+                    {
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_callability_interval_file_test_@JENKINSID@"
+                    }
+                ],
+                "type": "ALL"
+            }
+        },
+        "validators": [
+            {
+                "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
+                "metrics_compare": "@CHECKOUT@/tests/compare.sh",
+                "output_metrics": "/.mounts/labs/gsi/testdata/callability/output_metrics/interval_file_test.metrics",
+                "type": "script"
+            }
+        ]
+    }
+]
