@@ -1,6 +1,6 @@
 {
     "names": [
-        "callability_tumor_group"
+        "callability_matched_by_tumor_group"
     ],
     "wdl": "callability.wdl"
 }
