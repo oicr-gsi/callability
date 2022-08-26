@@ -72,7 +72,10 @@
             "callability.tumorMinCoverage": 14
         },
         "description": "Callability workflow test",
-        "engineArguments": {},
+        "engineArguments": {
+           "write_to_cache": false,
+           "read_from_cache": false
+        },
         "id": "no_interval_file_test",
         "metadata": {
             "callability.callabilityMetrics": {
@@ -166,7 +169,10 @@
             "callability.tumorMinCoverage": 14
         },
         "description": "Callability workflow test",
-        "engineArguments": {},
+        "engineArguments": {
+           "write_to_cache": false,
+           "read_from_cache": false
+        },
         "id": "interval_file_test",
         "metadata": {
             "callability.callabilityMetrics": {
