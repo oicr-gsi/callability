@@ -57,15 +57,13 @@ Output | Type | Description
 
 
 ## Commands
- This section lists command(s) run by WORKFLOW workflow
+ This section lists command(s) run by callability workflow
  
- * Running WORKFLOW
+ * Running callability
  
- === Description here ===.
- 
- <<<
-   set -euo pipefail
- 
+ Use mosdepth to merge neighboring regions, bedtools to get an intersection of the normal and tumor bam coverage by region,
+ and then use awk to count the regions passing a coverage threshold:
+ ```
    #export variables with mosdepth uses to add a fourth column to a new bed, merging neighboring regions if CALLABLE or LOW_COVERAGE
    export MOSDEPTH_Q0=LOW_COVERAGE
    export MOSDEPTH_Q1=CALLABLE
@@ -98,7 +96,7 @@ Output | Type | Description
    with open('~{outputFileNamePrefix}~{outputFileName}', 'w') as json_file:
        json.dump(metrics, json_file)
    CODE
-   >>>
+ ```
  ## Support
 
 For support, please file an issue on the [Github project](https://github.com/oicr-gsi) or send an email to gsi@oicr.on.ca .
