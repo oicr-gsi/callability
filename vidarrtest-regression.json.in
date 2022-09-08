@@ -8,18 +8,7 @@
             "callability.calculateCallability.outputFileNamePrefix": null,
             "callability.calculateCallability.threads": null,
             "callability.calculateCallability.timeout": null,
-            "callability.intervalFile": {
-                "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/hg19_random.genome.sizes.bed",
-                    "externalIds": [
-                        {
-                            "id": "TEST",
-                            "provider": "TEST"
-                        }
-                    ]
-                },
-                "type": "EXTERNAL"
-            },
+            "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/input_data/hg19_random.genome.sizes.bed",
             "callability.normalBam": {
                 "contents": {
                     "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bam",
@@ -105,18 +94,7 @@
             "callability.calculateCallability.outputFileNamePrefix": null,
             "callability.calculateCallability.threads": null,
             "callability.calculateCallability.timeout": null,
-            "callability.intervalFile": {
-                "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/S31285117_Covered.bed",
-                    "externalIds": [
-                        {
-                            "id": "TEST",
-                            "provider": "TEST"
-                        }
-                    ]
-                },
-                "type": "EXTERNAL"
-            },
+            "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/input_data/S31285117_Covered.bed",
             "callability.normalBam": {
                 "contents": {
                     "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bam",
