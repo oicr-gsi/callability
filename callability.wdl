@@ -71,6 +71,7 @@ task calculateCallability {
     Int normalMinCoverage
     Int tumorMinCoverage
     String intervalFile
+    Int min_map_q = 0
     Int threads = 4
     String? outputFileNamePrefix
     String outputFileName = "callability_metrics.json"
@@ -81,40 +82,46 @@ task calculateCallability {
   }
 
   command <<<
-  set -euo pipefail
+    set -euo pipefail
 
-  #export variables with mosdepth uses to add a fourth column to a new bed, merging neighboring regions if CALLABLE or LOW_COVERAGE
-  export MOSDEPTH_Q0=LOW_COVERAGE
-  export MOSDEPTH_Q1=CALLABLE
-  mosdepth -t ~{threads} -n --quantize 0:~{normalMinCoverage - 1}: normal ~{normalBam}
-  mosdepth -t ~{threads} -n --quantize 0:~{tumorMinCoverage - 1}: tumor ~{tumorBam}
-  zcat normal.quantized.bed.gz | awk '$4 == "CALLABLE"' | bedtools intersect -a stdin -b ~{intervalFile} > normal.callable
-  zcat tumor.quantized.bed.gz | awk '$4 == "CALLABLE"' | bedtools intersect -a stdin -b ~{intervalFile} > tumor.callable
+    #export variables with mosdepth uses to add a fourth column to a new bed, merging neighboring regions if CALLABLE or LOW_COVERAGE
+    export MOSDEPTH_Q0=LOW_COVERAGE
+    export MOSDEPTH_Q1=CALLABLE
 
-  PASS="$(bedtools intersect -a normal.callable -b tumor.callable -wao | awk '{sum+=$9} END{print sum}')"
-  TOTAL="$(zcat -f ~{intervalFile} | awk -F'\t' 'BEGIN{SUM=0}{SUM+=$3-$2} END{print SUM}')"
+    mosdepth -t ~{threads} \
+      --mapq ~{min_map_q} \ 
+      -n --quantize 0:~{normalMinCoverage - 1}: normal ~{normalBam}
+    mosdepth -t ~{threads} \
+      --mapq ~{min_map_q} \ 
+      -n --quantize 0:~{tumorMinCoverage - 1}: tumor ~{tumorBam}
+    
+    zcat normal.quantized.bed.gz | awk '$4 == "CALLABLE"' | bedtools intersect -a stdin -b ~{intervalFile} > normal.callable
+    zcat tumor.quantized.bed.gz | awk '$4 == "CALLABLE"' | bedtools intersect -a stdin -b ~{intervalFile} > tumor.callable
 
-  python3 <<CODE
-  import json
+    PASS="$(bedtools intersect -a normal.callable -b tumor.callable -wao | awk '{sum+=$9} END{print sum}')"
+    TOTAL="$(zcat -f ~{intervalFile} | awk -F'\t' 'BEGIN{SUM=0}{SUM+=$3-$2} END{print SUM}')"
 
-  total_count = int(float("${TOTAL}"))
-  pass_count = int(float("${PASS}"))
-  fail_count = total_count - pass_count
-  if pass_count == 0 and fail_count == 0:
-      callability = 0
-  else:
-      callability = pass_count / (pass_count + fail_count)
+    python3 <<CODE
+      import json
 
-  metrics = {
-      "pass": pass_count,
-      "fail": fail_count,
-      "callability": round(callability, 6),
-      "normal_min_coverage": ~{normalMinCoverage},
-      "tumor_min_coverage": ~{tumorMinCoverage}
-  }
-  with open('~{outputFileNamePrefix}~{outputFileName}', 'w') as json_file:
-      json.dump(metrics, json_file)
-  CODE
+      total_count = int(float("${TOTAL}"))
+      pass_count = int(float("${PASS}"))
+      fail_count = total_count - pass_count
+      if pass_count == 0 and fail_count == 0:
+          callability = 0
+      else:
+          callability = pass_count / (pass_count + fail_count)
+
+      metrics = {
+          "pass": pass_count,
+          "fail": fail_count,
+          "callability": round(callability, 6),
+          "normal_min_coverage": ~{normalMinCoverage},
+          "tumor_min_coverage": ~{tumorMinCoverage}
+      }
+      with open('~{outputFileNamePrefix}~{outputFileName}', 'w') as json_file:
+          json.dump(metrics, json_file)
+    CODE
   >>>
 
   output {
