@@ -51,19 +51,20 @@ Parameter|Value|Default|Description
 
 ### Outputs
 
-Output | Type | Description
----|---|---
-`callabilityMetrics`|File|Json file with pass, fail and callability percent (# of pass bases / # total bases)
+Output | Type | Description | Labels
+---|---|---|---
+`callabilityMetrics`|File|Json file with pass, fail and callability percent (# of pass bases / # total bases)|vidarr_label: callabilityMetrics
 
 
 ## Commands
- This section lists command(s) run by callability workflow
+This section lists command(s) run by callability workflow
  
- * Running callability
+* Running callability
  
- Use mosdepth to merge neighboring regions, bedtools to get an intersection of the normal and tumor bam coverage by region,
- and then use awk to count the regions passing a coverage threshold:
- ```
+Use mosdepth to merge neighboring regions, bedtools to get an intersection of the normal and tumor bam coverage by region,
+and then use awk to count the regions passing a coverage threshold:
+
+```
    #export variables with mosdepth uses to add a fourth column to a new bed, merging neighboring regions if CALLABLE or LOW_COVERAGE
    export MOSDEPTH_Q0=LOW_COVERAGE
    export MOSDEPTH_Q1=CALLABLE
@@ -96,8 +97,8 @@ Output | Type | Description
    with open('~{outputFileNamePrefix}~{outputFileName}', 'w') as json_file:
        json.dump(metrics, json_file)
    CODE
- ```
- ## Support
+```
+## Support
 
 For support, please file an issue on the [Github project](https://github.com/oicr-gsi) or send an email to gsi@oicr.on.ca .
 
