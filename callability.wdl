@@ -56,8 +56,11 @@ workflow callability {
       }
     ]
     output_meta: {
-      callabilityMetrics: "Json file with pass, fail and callability percent (# of pass bases / # total bases)"
+    callabilityMetrics: {
+        description: "Json file with pass, fail and callability percent (# of pass bases / # total bases)",
+        vidarr_label: "callabilityMetrics"
     }
+}
   }
 
 }
