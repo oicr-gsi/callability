@@ -75,6 +75,7 @@ task calculateCallability {
     Int tumorMinCoverage
     String intervalFile
     Int threads = 4
+    Int min_map_q = 25
     String? outputFileNamePrefix
     String outputFileName = "callability_metrics.json"
     Int jobMemory = 8
@@ -89,8 +90,10 @@ task calculateCallability {
   #export variables with mosdepth uses to add a fourth column to a new bed, merging neighboring regions if CALLABLE or LOW_COVERAGE
   export MOSDEPTH_Q0=LOW_COVERAGE
   export MOSDEPTH_Q1=CALLABLE
-  mosdepth -t ~{threads} -n --quantize 0:~{normalMinCoverage - 1}: normal ~{normalBam}
-  mosdepth -t ~{threads} -n --quantize 0:~{tumorMinCoverage - 1}: tumor ~{tumorBam}
+
+  mosdepth -t ~{threads} --mapq ~{min_map_q} -n --quantize 0:~{normalMinCoverage - 1}: normal ~{normalBam}
+  mosdepth -t ~{threads} --mapq ~{min_map_q} -n --quantize 0:~{tumorMinCoverage - 1}: tumor ~{tumorBam}
+
   zcat normal.quantized.bed.gz | awk '$4 == "CALLABLE"' | bedtools intersect -a stdin -b ~{intervalFile} > normal.callable
   zcat tumor.quantized.bed.gz | awk '$4 == "CALLABLE"' | bedtools intersect -a stdin -b ~{intervalFile} > tumor.callable
 
