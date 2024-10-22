@@ -1,5 +1,9 @@
 version 1.0
 
+struct Output {
+    Pair[File,Map[String,String]] metric
+}
+
 workflow callability {
 
   input {
@@ -24,7 +28,7 @@ workflow callability {
   }
 
   output {
-    File callabilityMetrics = calculateCallability.callabilityMetrics
+    Output callabilityMetrics = calculateCallability.callabilityOutput
   }
 
   parameter_meta {
@@ -56,11 +60,8 @@ workflow callability {
       }
     ]
     output_meta: {
-    callabilityMetrics: {
-        description: "Json file with pass, fail and callability percent (# of pass bases / # total bases)",
-        vidarr_label: "callabilityMetrics"
+    callabilityMetrics: "Json file with pass, fail and callability percent (# of pass bases / # total bases)"
     }
-}
   }
 
 }
@@ -90,7 +91,7 @@ task calculateCallability {
   export MOSDEPTH_Q0=LOW_COVERAGE
   export MOSDEPTH_Q1=CALLABLE
   mosdepth -t ~{threads} -n --quantize 0:~{normalMinCoverage - 1}: normal ~{normalBam}
-  mosdepth -t ~{threads} -n --quantize 0:~{tumorMinCoverage - 1}: tumor ~{tumorBam}
+  mosdepth -t ~{threads} -n --quantize 1:~{tumorMinCoverage - 1}: tumor ~{tumorBam}
   zcat normal.quantized.bed.gz | awk '$4 == "CALLABLE"' | bedtools intersect -a stdin -b ~{intervalFile} > normal.callable
   zcat tumor.quantized.bed.gz | awk '$4 == "CALLABLE"' | bedtools intersect -a stdin -b ~{intervalFile} > tumor.callable
 
@@ -109,6 +110,7 @@ task calculateCallability {
       callability = pass_count / (pass_count + fail_count)
 
   metrics = {
+      "interval_file": "~{intervalFile}",
       "pass": pass_count,
       "fail": fail_count,
       "callability": round(callability, 6),
@@ -117,11 +119,17 @@ task calculateCallability {
   }
   with open('~{outputFileNamePrefix}~{outputFileName}', 'w') as json_file:
       json.dump(metrics, json_file)
+  outputs = json.loads("{\"metric\": {\"left\": \"~{outputFileName}\", \"right\": {\"interval_file\": \"~{intervalFile}\"}}}")
+  with open('output.json', 'w') as json_file:
+      json.dump(outputs, json_file)
   CODE
+
+  
   >>>
 
   output {
-    File callabilityMetrics = outputFileName
+    #File callabilityMetrics = outputFileName
+    Output callabilityOutput = read_json("output.json")
   }
 
   runtime {
