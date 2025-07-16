@@ -8,10 +8,10 @@
             "callability.calculateCallability.outputFileNamePrefix": null,
             "callability.calculateCallability.threads": null,
             "callability.calculateCallability.timeout": null,
-            "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/input_data/hg19_random.genome.sizes.bed",
+            "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/test_inputs/hg19_random.genome.sizes.bed",
             "callability.normalBam": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bam",
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/test_inputs/Test02.sorted.rg.bam",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -23,7 +23,7 @@
             },
             "callability.normalBamIndex": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bai",
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/test_inputs/Test02.sorted.rg.bai",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -36,7 +36,7 @@
             "callability.normalMinCoverage": 8,
             "callability.tumorBam": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bam",
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/test_inputs/Test01.sorted.rg.bam",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -48,7 +48,7 @@
             },
             "callability.tumorBamIndex": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bai",
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/test_inputs/Test01.sorted.rg.bai",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -80,7 +80,7 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/callability/output_metrics/no_interval_file_test.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/callability/output_metrics/workflow_test_01.metrics",
                 "type": "script"
             }
         ]
@@ -94,10 +94,10 @@
             "callability.calculateCallability.outputFileNamePrefix": null,
             "callability.calculateCallability.threads": null,
             "callability.calculateCallability.timeout": null,
-            "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/input_data/S31285117_Covered.bed",
+            "callability.intervalFile": "/.mounts/labs/gsi/testdata/callability/test_inputs/TN_Covered.bed",
             "callability.normalBam": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bam",
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/test_inputs/Test02.sorted.rg.bam",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -109,7 +109,7 @@
             },
             "callability.normalBamIndex": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732315.SRR222175.sorted.rg.bai",
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/test_inputs/Test02.sorted.rg.bai",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -122,7 +122,7 @@
             "callability.normalMinCoverage": 8,
             "callability.tumorBam": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bam",
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/test_inputs/Test01.sorted.rg.bam",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -134,7 +134,7 @@
             },
             "callability.tumorBamIndex": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/callability/input_data/GSM732316.SRR222176.sorted.rg.bai",
+                    "configuration": "/.mounts/labs/gsi/testdata/callability/test_inputs/Test01.sorted.rg.bai",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -166,7 +166,7 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/callability/output_metrics/interval_file_test.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/callability/output_metrics/workflow_test_02.metrics",
                 "type": "script"
             }
         ]
